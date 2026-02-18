@@ -365,29 +365,211 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .slider {
-        width: 240px;
-    }
+/* Novos estilos para interface melhorada */
 
-    .header {
-        padding: 30px 15px;
-    }
+.question-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
 
-    .content {
-        padding: 20px 10px;
-    }
+.area-badge {
+    background: #d2bc8f;
+    color: #082033;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-family: 'Readex Pro', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
 
-    .step-container {
-        padding: 20px;
-    }
+.question-progress {
+    color: #d2bc8f;
+    font-family: 'Readex Pro', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
 
+.progress-percentage {
+    color: rgba(255,255,255,0.8);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.question-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.question-number {
+    color: #d2bc8f;
+    font-family: 'Readex Pro', sans-serif;
+    font-weight: 600;
+    font-size: 1.0em;
+    margin-bottom: 20px;
+}
+
+.question-text {
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 1.4em;
+    font-weight: 500;
+    color: white;
+    line-height: 1.4;
+    margin-bottom: 40px;
+}
+
+.score-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 30px 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.score-button {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Readex Pro', sans-serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-button:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+}
+
+.score-button.selected {
+    background: #d2bc8f;
+    border-color: #d2bc8f;
+    color: #082033;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(210, 188, 143, 0.3);
+}
+
+.score-labels {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.7);
+}
+
+.score-label-left, .score-label-right {
+    font-weight: 500;
+}
+
+.score-explanation {
+    background: rgba(210, 188, 143, 0.1);
+    border: 1px solid rgba(210, 188, 143, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.explanation-title {
+    color: #d2bc8f;
+    font-family: 'Readex Pro', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.explanation-description {
+    color: rgba(255,255,255,0.9);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.question-navigation {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.nav-button {
+    font-family: 'Readex Pro', sans-serif;
+    background: #d2bc8f;
+    color: #082033;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 140px;
+}
+
+.nav-button:hover {
+    background: #c1a76f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(210, 188, 143, 0.3);
+}
+
+.nav-button.primary {
+    background: #d2bc8f;
+}
+
+/* Animações */
+@keyframes scoreSelect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1.1); }
+}
+
+.score-button.selected {
+    animation: scoreSelect 0.3s ease;
+}
+
+/* Responsivo para score grid */
+@media (max-width: 768px) {
+    .score-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        max-width: 320px;
+    }
+    
+    .score-button {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1em;
+    }
+    
+    .question-card {
+        padding: 25px;
+    }
+    
     .question-text {
         font-size: 1.2em;
-    }
-
-    .score-display {
-        font-size: 2em;
-        padding: 15px 25px;
     }
 }
