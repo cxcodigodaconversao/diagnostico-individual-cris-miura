@@ -93,19 +93,6 @@ body {
     margin: 50px 0;
 }
 
-.question-text {
-    font-family: 'Readex Pro', sans-serif;
-    font-size: 1.6em;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 40px;
-    line-height: 1.4;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-}
-
 .rating-container {
     display: flex;
     flex-direction: column;
@@ -325,47 +312,16 @@ body {
 }
 
 @media (max-width: 768px) {
-    .slider {
-        width: 280px;
-    }
-    
-    .navigation {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .btn {
-        width: 100%;
-    }
-    
-    .header h1 {
-        font-size: 2.2em;
-    }
-    
-    .area-title {
-        font-size: 1.8em;
-    }
-    
-    .question-text {
-        font-size: 1.3em;
-    }
-    
-    .score-circle {
-        width: 180px;
-        height: 180px;
-        font-size: 2.8em;
-    }
-
-    .step-container {
-        padding: 25px;
-    }
-
-    .area-explanation {
-        padding: 20px;
-    }
+    .slider { width: 280px; }
+    .navigation { flex-direction: column; gap: 20px; }
+    .btn { width: 100%; }
+    .header h1 { font-size: 2.2em; }
+    .area-title { font-size: 1.8em; }
+    .question-text { font-size: 1.3em; }
+    .score-circle { width: 180px; height: 180px; font-size: 2.8em; }
+    .step-container { padding: 25px; }
+    .area-explanation { padding: 20px; }
 }
-
-/* Novos estilos para interface melhorada */
 
 .question-header {
     text-align: center;
@@ -470,6 +426,7 @@ body {
     color: #082033;
     transform: scale(1.1);
     box-shadow: 0 5px 15px rgba(210, 188, 143, 0.3);
+    animation: scoreSelect 0.3s ease;
 }
 
 .score-labels {
@@ -540,36 +497,19 @@ body {
     background: #d2bc8f;
 }
 
-/* Animações */
 @keyframes scoreSelect {
     0% { transform: scale(1); }
     50% { transform: scale(1.15); }
     100% { transform: scale(1.1); }
 }
 
-.score-button.selected {
-    animation: scoreSelect 0.3s ease;
-}
-
-/* Responsivo para score grid */
 @media (max-width: 768px) {
     .score-grid {
         grid-template-columns: repeat(5, 1fr);
         gap: 8px;
         max-width: 320px;
     }
-    
-    .score-button {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1em;
-    }
-    
-    .question-card {
-        padding: 25px;
-    }
-    
-    .question-text {
-        font-size: 1.2em;
-    }
+    .score-button { width: 45px; height: 45px; font-size: 1.1em; }
+    .question-card { padding: 25px; }
+    .question-text { font-size: 1.2em; }
 }
