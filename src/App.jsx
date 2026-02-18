@@ -414,4 +414,30 @@ const App = () => {
                 </div>
               </div>
               <div style={{textAlign: 'center', marginTop: '40px'}}>
-                <button onClick={restartDiagnostic} style={{fontFamily: 'R
+                <button onClick={restartDiagnostic} style={{fontFamily: 'Readex Pro, sans-serif', background: 'white', color: '#082033', border: 'none', padding: '15px 40px', borderRadius: '8px', fontSize: '1.1em', fontWeight: 600, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '1px'}}>
+                  Refazer Diagnóstico
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="container">
+      <div className="header">
+        <h1>🦷 Diagnóstico Individual de Valorização Profissional</h1>
+        <p>Descubra seu nível atual de valorização profissional através de uma avaliação detalhada</p>
+      </div>
+      <div className="content">
+        {currentStep === 'explanation' && renderExplanation()}
+        {currentStep === 'question' && renderQuestion()}
+        {currentStep === 'results' && renderResults()}
+      </div>
+    </div>
+  )
+}
+
+export default App
