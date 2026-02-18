@@ -12,13 +12,13 @@ Uma aplicação web interativa para avaliar o nível de valorização profission
 
 ## 📊 Áreas Avaliadas
 
-1. **Consulta Extraordinária** - Comunicação e fechamento de TPMC/PIC
+1. **Consulta Extraordinária** - Comunicação e fechamento de TPNC/PIC
 2. **RM3em1** - Metodologia revolucionária de raspagem
 3. **Tratamento Periodontal** - Domínio de técnicas avançadas
 4. **Problemas Sistêmicos** - Manejo de pacientes complexos
 5. **Precificação** - Estratégias de valorização por valor
 6. **Captação** - Reputação e marketing baseado em resultados
-7. **Recorrência** - Manutenção através de TPMC/PIC
+7. **Recorrência** - Manutenção através de TPNC/PIC
 
 ## 🛠️ Tecnologias
 
@@ -28,7 +28,6 @@ Uma aplicação web interativa para avaliar o nível de valorização profission
 - **JavaScript ES6+** - Lógica da aplicação
 
 ## 📦 Instalação
-
 ```bash
 # Clone o repositório
 git clone https://github.com/seu-usuario/diagnostico-valorizacao-profissional.git
@@ -57,7 +56,6 @@ npm run build
 3. Deploy automático a cada push
 
 ### Vercel
-
 ```bash
 npm install -g vercel
 vercel --prod
