@@ -4,7 +4,7 @@ const DiagnosticoCX = () => {
   const [currentAreaIndex, setCurrentAreaIndex] = useState(0)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState([])
-  const [currentStep, setCurrentStep] = useState('explanation') // 'explanation', 'question', 'results'
+  const [currentStep, setCurrentStep] = useState('explanation')
 
   const diagnosticoData = {
     areas: [
@@ -109,7 +109,6 @@ const DiagnosticoCX = () => {
     ]
   }
 
-  // Initialize answers on component mount
   useState(() => {
     setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(1)))
   }, [])
@@ -153,9 +152,8 @@ const DiagnosticoCX = () => {
     diagnosticoData.areas.forEach((area, areaIndex) => {
       const areaAnswers = answers[areaIndex] || new Array(area.perguntas.length).fill(1)
       const areaTotal = areaAnswers.reduce((sum, score) => sum + score, 0)
-      // Ajuste para escala 1-10: (total - mínimo) / (máximo - mínimo) * 100
-      const minScore = area.perguntas.length * 1 // mínimo possível
-      const maxScore = area.perguntas.length * 10 // máximo possível
+      const minScore = area.perguntas.length * 1
+      const maxScore = area.perguntas.length * 10
       const areaPercentage = Math.round(((areaTotal - minScore) / (maxScore - minScore)) * 100)
       areaScores.push({
         nome: area.nome,
@@ -259,11 +257,6 @@ const DiagnosticoCX = () => {
   }
 
   const restartDiagnostic = () => {
-    setCurrentAreaIndex(0)
-    setCurrentQuestionIndex(0)
-    setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(1)))
-    setCurrentStep('explanation')
-  }
     setCurrentAreaIndex(0)
     setCurrentQuestionIndex(0)
     setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(1)))
@@ -481,25 +474,9 @@ const DiagnosticoCX = () => {
                   margin: '25px 0',
                   textAlign: 'left'
                 }}>
-                  <div style={{
-                    background: 'rgba(8, 32, 51, 0.1)',
-                    padding: '25px',
-                    borderRadius: '6px'
-                  }}>
-                    <h5 style={{
-                      color: '#082033',
-                      fontSize: '1.2em',
-                      marginBottom: '15px',
-                      fontWeight: 600,
-                      textAlign: 'center'
-                    }}>DIRECIONAMENTO</h5>
-                    <p style={{
-                      color: '#082033',
-                      fontSize: '0.95em',
-                      lineHeight: '1.4',
-                      marginBottom: '15px',
-                      textAlign: 'center'
-                    }}>Saber exatamente o que fazer e como fazer</p>
+                  <div style={{background: 'rgba(8, 32, 51, 0.1)', padding: '25px', borderRadius: '6px'}}>
+                    <h5 style={{color: '#082033', fontSize: '1.2em', marginBottom: '15px', fontWeight: 600, textAlign: 'center'}}>DIRECIONAMENTO</h5>
+                    <p style={{color: '#082033', fontSize: '0.95em', lineHeight: '1.4', marginBottom: '15px', textAlign: 'center'}}>Saber exatamente o que fazer e como fazer</p>
                     <div style={{fontSize: '0.9em', lineHeight: '1.5'}}>
                       <div style={{marginBottom: '8px'}}>🦷 Protocolo claro para cada procedimento</div>
                       <div style={{marginBottom: '8px'}}>🦷 Estratégia de precificação estruturada</div>
@@ -509,25 +486,9 @@ const DiagnosticoCX = () => {
                     </div>
                   </div>
                   
-                  <div style={{
-                    background: 'rgba(8, 32, 51, 0.1)',
-                    padding: '25px',
-                    borderRadius: '6px'
-                  }}>
-                    <h5 style={{
-                      color: '#082033',
-                      fontSize: '1.2em',
-                      marginBottom: '15px',
-                      fontWeight: 600,
-                      textAlign: 'center'
-                    }}>FEEDBACK</h5>
-                    <p style={{
-                      color: '#082033',
-                      fontSize: '0.95em',
-                      lineHeight: '1.4',
-                      marginBottom: '15px',
-                      textAlign: 'center'
-                    }}>Acompanhamento constante dos seus processos</p>
+                  <div style={{background: 'rgba(8, 32, 51, 0.1)', padding: '25px', borderRadius: '6px'}}>
+                    <h5 style={{color: '#082033', fontSize: '1.2em', marginBottom: '15px', fontWeight: 600, textAlign: 'center'}}>FEEDBACK</h5>
+                    <p style={{color: '#082033', fontSize: '0.95em', lineHeight: '1.4', marginBottom: '15px', textAlign: 'center'}}>Acompanhamento constante dos seus processos</p>
                     <div style={{fontSize: '0.9em', lineHeight: '1.5'}}>
                       <div style={{marginBottom: '8px'}}>🦷 Correção de técnicas em tempo real</div>
                       <div style={{marginBottom: '8px'}}>🦷 Ajuste de precificação quando necessário</div>
@@ -537,25 +498,9 @@ const DiagnosticoCX = () => {
                     </div>
                   </div>
                   
-                  <div style={{
-                    background: 'rgba(8, 32, 51, 0.1)',
-                    padding: '25px',
-                    borderRadius: '6px'
-                  }}>
-                    <h5 style={{
-                      color: '#082033',
-                      fontSize: '1.2em',
-                      marginBottom: '15px',
-                      fontWeight: 600,
-                      textAlign: 'center'
-                    }}>COMUNIDADE</h5>
-                    <p style={{
-                      color: '#082033',
-                      fontSize: '0.95em',
-                      lineHeight: '1.4',
-                      marginBottom: '15px',
-                      textAlign: 'center'
-                    }}>Estar no ambiente certo com pessoas certas</p>
+                  <div style={{background: 'rgba(8, 32, 51, 0.1)', padding: '25px', borderRadius: '6px'}}>
+                    <h5 style={{color: '#082033', fontSize: '1.2em', marginBottom: '15px', fontWeight: 600, textAlign: 'center'}}>COMUNIDADE</h5>
+                    <p style={{color: '#082033', fontSize: '0.95em', lineHeight: '1.4', marginBottom: '15px', textAlign: 'center'}}>Estar no ambiente certo com pessoas certas</p>
                     <div style={{fontSize: '0.9em', lineHeight: '1.5'}}>
                       <div style={{marginBottom: '8px'}}>🦷 Troca de experiências entre profissionais</div>
                       <div style={{marginBottom: '8px'}}>🦷 Networking qualificado e parcerias</div>
@@ -565,6 +510,27 @@ const DiagnosticoCX = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div style={{textAlign: 'center', marginTop: '40px'}}>
+                <button 
+                  onClick={restartDiagnostic}
+                  style={{
+                    fontFamily: 'Readex Pro, sans-serif',
+                    background: 'white',
+                    color: '#082033',
+                    border: 'none',
+                    padding: '15px 40px',
+                    borderRadius: '8px',
+                    fontSize: '1.1em',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px'
+                  }}
+                >
+                  Refazer Diagnóstico
+                </button>
               </div>
             </div>
           </div>
