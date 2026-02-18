@@ -111,7 +111,7 @@ const DiagnosticoCX = () => {
 
   // Initialize answers on component mount
   useState(() => {
-    setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(0)))
+    setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(1)))
   }, [])
 
   const startQuestions = () => {
@@ -135,15 +135,15 @@ const DiagnosticoCX = () => {
   const updateCurrentScore = (value) => {
     const newAnswers = [...answers]
     if (!newAnswers[currentAreaIndex]) {
-      newAnswers[currentAreaIndex] = new Array(diagnosticoData.areas[currentAreaIndex].perguntas.length).fill(0)
+      newAnswers[currentAreaIndex] = new Array(diagnosticoData.areas[currentAreaIndex].perguntas.length).fill(1)
     }
     newAnswers[currentAreaIndex][currentQuestionIndex] = parseInt(value)
     setAnswers(newAnswers)
   }
 
   const getCurrentScore = () => {
-    if (!answers[currentAreaIndex]) return 0
-    return answers[currentAreaIndex][currentQuestionIndex] || 0
+    if (!answers[currentAreaIndex]) return 1
+    return answers[currentAreaIndex][currentQuestionIndex] || 1
   }
 
   const calculateResults = () => {
@@ -151,9 +151,12 @@ const DiagnosticoCX = () => {
     let totalPercentage = 0
     
     diagnosticoData.areas.forEach((area, areaIndex) => {
-      const areaAnswers = answers[areaIndex] || new Array(area.perguntas.length).fill(0)
+      const areaAnswers = answers[areaIndex] || new Array(area.perguntas.length).fill(1)
       const areaTotal = areaAnswers.reduce((sum, score) => sum + score, 0)
-      const areaPercentage = Math.round((areaTotal / (area.perguntas.length * 10)) * 100)
+      // Ajuste para escala 1-10: (total - mínimo) / (máximo - mínimo) * 100
+      const minScore = area.perguntas.length * 1 // mínimo possível
+      const maxScore = area.perguntas.length * 10 // máximo possível
+      const areaPercentage = Math.round(((areaTotal - minScore) / (maxScore - minScore)) * 100)
       areaScores.push({
         nome: area.nome,
         percentage: areaPercentage
@@ -239,10 +242,31 @@ const DiagnosticoCX = () => {
     }
   }
 
+  const getScoreExplanation = (score) => {
+    const explanations = {
+      1: { label: "Nunca consigo", description: "Não tenho conhecimento ou experiência nesta área" },
+      2: { label: "Raramente consigo", description: "Tenho conhecimento muito básico, mas pouca aplicação prática" },
+      3: { label: "Às vezes consigo", description: "Conhecimento básico com aplicação esporádica" },
+      4: { label: "Ocasionalmente consigo", description: "Algum conhecimento, mas inconsistente na aplicação" },
+      5: { label: "Consigo medianamente", description: "Conhecimento intermediário com aplicação moderada" },
+      6: { label: "Consigo bem", description: "Bom conhecimento com aplicação regular" },
+      7: { label: "Consigo muito bem", description: "Conhecimento avançado com boa aplicação prática" },
+      8: { label: "Consigo excelentemente", description: "Conhecimento sólido com aplicação consistente" },
+      9: { label: "Consigo com maestria", description: "Conhecimento avançado com excelente aplicação" },
+      10: { label: "Sempre consigo", description: "Domínio completo com aplicação excepcional e consistente" }
+    }
+    return explanations[score] || explanations[1]
+  }
+
   const restartDiagnostic = () => {
     setCurrentAreaIndex(0)
     setCurrentQuestionIndex(0)
-    setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(0)))
+    setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(1)))
+    setCurrentStep('explanation')
+  }
+    setCurrentAreaIndex(0)
+    setCurrentQuestionIndex(0)
+    setAnswers(diagnosticoData.areas.map(area => new Array(area.perguntas.length).fill(1)))
     setCurrentStep('explanation')
   }
 
