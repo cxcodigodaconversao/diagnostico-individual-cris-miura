@@ -300,45 +300,56 @@ const DiagnosticoCX = () => {
     const isLastQuestion = (currentAreaIndex === diagnosticoData.areas.length - 1) && 
                           (currentQuestionIndex === area.perguntas.length - 1)
     
+    const currentScore = getCurrentScore()
+    const explanation = getScoreExplanation(currentScore)
+    const progressPercentage = Math.round((absoluteQuestionIndex / totalQuestions) * 100)
+    
     return (
       <div className="step-container">
-        <div className="area-title">{area.nome}</div>
-        <div className="question-container">
-          <div className="question-text">
-            <strong>{area.perguntas[currentQuestionIndex]}</strong>
-          </div>
-          <div className="rating-container">
-            <div className="rating-scale">
-              <span>0</span>
-              <input 
-                type="range" 
-                className="slider" 
-                min="0" 
-                max="10" 
-                value={getCurrentScore()} 
-                onChange={(e) => updateCurrentScore(e.target.value)}
-              />
-              <span>10</span>
-            </div>
-            <div className="score-display">{getCurrentScore()}</div>
-          </div>
-        </div>
-        
-        <div className="progress">
-          <div>Pergunta {absoluteQuestionIndex} de {totalQuestions}</div>
+        <div className="question-header">
+          <div className="area-badge">{area.nome}</div>
+          <div className="question-progress">Pergunta {absoluteQuestionIndex} de {totalQuestions}</div>
+          <div className="progress-percentage">{progressPercentage}% concluído</div>
           <div className="progress-bar">
             <div 
               className="progress-fill" 
-              style={{width: `${(absoluteQuestionIndex / totalQuestions) * 100}%`}}
+              style={{width: `${progressPercentage}%`}}
             ></div>
           </div>
         </div>
         
-        <div className="navigation">
-          <div></div>
-          <div className="progress">{currentQuestionIndex + 1}/{area.perguntas.length} - {area.nome}</div>
-          <button className="btn" onClick={nextQuestion}>
-            {isLastQuestion ? 'Finalizar 🏁' : 'Próxima ➡'}
+        <div className="question-card">
+          <div className="question-number">Pergunta {currentQuestionIndex + 1}/{area.perguntas.length}</div>
+          <div className="question-text">
+            {area.perguntas[currentQuestionIndex]}
+          </div>
+          
+          <div className="score-grid">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number => (
+              <button
+                key={number}
+                className={`score-button ${currentScore === number ? 'selected' : ''}`}
+                onClick={() => updateCurrentScore(number)}
+              >
+                {number}
+              </button>
+            ))}
+          </div>
+          
+          <div className="score-labels">
+            <span className="score-label-left">Nunca consigo</span>
+            <span className="score-label-right">Sempre consigo</span>
+          </div>
+          
+          <div className="score-explanation">
+            <div className="explanation-title">{explanation.label}</div>
+            <div className="explanation-description">{explanation.description}</div>
+          </div>
+        </div>
+        
+        <div className="question-navigation">
+          <button className="nav-button primary" onClick={nextQuestion}>
+            {isLastQuestion ? 'FINALIZAR' : 'PRÓXIMA'}
           </button>
         </div>
       </div>
