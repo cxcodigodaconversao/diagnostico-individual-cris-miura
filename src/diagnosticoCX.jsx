@@ -12,14 +12,14 @@ const DiagnosticoCX = () => {
         nome: "CONSULTA EXTRAORDINÁRIA",
         explicacao: {
           titulo: "O que é Consulta Extraordinária?",
-          texto: "A Consulta Extraordinária é o momento onde você demonstra sua expertise e diferencial como profissional. É aqui que você conta histórias que conectam emocionalmente com o paciente, realiza exames detalhados como periogramas, e consegue fechar TPMC/PIC usando técnicas avançadas de comunicação e persuasão."
+          texto: "A Consulta Extraordinária é o momento onde você demonstra sua expertise e diferencial como profissional. É aqui que você conta histórias que conectam emocionalmente com o paciente, realiza exames detalhados como periogramas, e consegue fechar TPNC/PIC usando técnicas avançadas de comunicação e persuasão."
         },
         perguntas: [
           "A cada 10 pacientes, quantos deles ouvem de você uma das 7 histórias que salvam dentes?",
           "A cada 10 pacientes, quantos periogramas você realiza dentro da alavanca da ação do paciente?",
-          "A cada 10 pacientes, quantos TPMC/PIC consegue fechar?",
+          "A cada 10 pacientes, quantos TPNC/PIC consegue fechar?",
           "O quanto você utilizou a técnica da bola de cristal nos últimos 10 pacientes?",
-          "Nos últimos 10 pacientes, o quanto você utilizou o medo ou sonho como elemento de fechamento do TPMC/PIC?"
+          "Nos últimos 10 pacientes, o quanto você utilizou o medo ou sonho como elemento de fechamento do TPNC/PIC?"
         ]
       },
       {
@@ -96,14 +96,14 @@ const DiagnosticoCX = () => {
         nome: "RECORRÊNCIA",
         explicacao: {
           titulo: "O que é Recorrência de Pacientes?",
-          texto: "Refere-se à capacidade de manter pacientes em tratamentos contínuos através de TPMC/PIC (Tratamento Periodontal de Manutenção Customizado/Prevenção Integrada Customizada). Inclui o engajamento de diferentes perfis de pacientes em programas de manutenção e a apresentação constante de novidades e melhorias para manter o interesse e adesão ao tratamento."
+          texto: "Refere-se à capacidade de manter pacientes em tratamentos contínuos através de TPNC/PIC (Tratamento Periodontal Não Cirúrgico/Prevenção Integrada Customizada). Inclui o engajamento de diferentes perfis de pacientes em programas de manutenção e a apresentação constante de novidades e melhorias para manter o interesse e adesão ao tratamento."
         },
         perguntas: [
-          "A cada 10 pacientes idosos, adolescentes ou gestantes, quantos deles estão em um TPMC/PIC?",
-          "A cada 10 pacientes com implantes ou protocolo, quantos deles estão em um TPMC/PIC?",
-          "A cada 10 pacientes com doenças cardiovasculares (hipertensão, stent, infarto, AVC, dislipidemia), quantos deles estão em um TPMC/PIC?",
+          "A cada 10 pacientes idosos, adolescentes ou gestantes, quantos deles estão em um TPNC/PIC?",
+          "A cada 10 pacientes com implantes ou protocolo, quantos deles estão em um TPNC/PIC?",
+          "A cada 10 pacientes com doenças cardiovasculares (hipertensão, stent, infarto, AVC, dislipidemia), quantos deles estão em um TPNC/PIC?",
           "Nos 10 últimos atendimentos, quantos deles você apresentou novidades (produtos odontológicos ou orientações de estilo de vida) para os pacientes?",
-          "A cada 10 pacientes, quantos estão em um TPMC/PIC?"
+          "A cada 10 pacientes, quantos estão em um TPNC/PIC?"
         ]
       }
     ]
@@ -188,8 +188,8 @@ const DiagnosticoCX = () => {
           "Técnicas de comunicação das 7 histórias que salvam dentes",
           "Estratégias de precificação para atingir valores de referência",
           "Domínio completo da técnica RM3em1",
-          "Protocolos de TPMC/PIC para casos de mobilidade dentária",
-          "Sistemas de manutenção através de TPMC/PIC",
+          "Protocolos de TPNC/PIC para casos de mobilidade dentária",
+          "Sistemas de manutenção através de TPNC/PIC",
           "Confiança em procedimentos de alta complexidade periodontal"
         ]
       }
@@ -203,7 +203,7 @@ const DiagnosticoCX = () => {
           "Habilidades de comunicação das histórias que conectam",
           "Estratégia de precificação (muito abaixo do potencial)",
           "Sistema de captação baseado na reputação de 'salvar dentes'",
-          "Protocolos de TPMC/PIC para casos de perda óssea",
+          "Protocolos de TPNC/PIC para casos de perda óssea",
           "Confiança em procedimentos sem cirurgia para periodontite"
         ]
       }
@@ -217,7 +217,7 @@ const DiagnosticoCX = () => {
           "Técnicas de comunicação das histórias que salvam dentes",
           "Sistema completo de precificação para alta lucratividade",
           "Estratégias para ser reconhecido como referência",
-          "Protocolos de TPMC/PIC para tratar periodontite sem cirurgia",
+          "Protocolos de TPNC/PIC para tratar periodontite sem cirurgia",
           "Confiança e segurança técnica em casos complexos",
           "Gestão de pacientes com mobilidade e perda óssea"
         ]
@@ -231,7 +231,7 @@ const DiagnosticoCX = () => {
           "TODOS os fundamentos do Método Dentista que Salva Dentes",
           "Habilidades básicas de comunicação com pacientes",
           "Conceitos elementares de precificação por valor",
-          "Sistemas básicos de organização e protocolos de TPMC/PIC",
+          "Sistemas básicos de organização e protocolos de TPNC/PIC",
           "Técnicas básicas de instrumentação periodontal",
           "Relacionamento baseado em confiança e resultados",
           "Competência técnica fundamental para salvar dentes"
@@ -482,7 +482,7 @@ const DiagnosticoCX = () => {
                       <div style={{marginBottom: '8px'}}>🦷 Estratégia de precificação estruturada</div>
                       <div style={{marginBottom: '8px'}}>🦷 Técnicas de comunicação eficazes</div>
                       <div style={{marginBottom: '8px'}}>🦷 Sistema de captação organizado</div>
-                      <div style={{marginBottom: '8px'}}>🦷 TPMC/PIC padronizados</div>
+                      <div style={{marginBottom: '8px'}}>🦷 TPNC/PIC padronizados</div>
                     </div>
                   </div>
                   
@@ -493,7 +493,7 @@ const DiagnosticoCX = () => {
                       <div style={{marginBottom: '8px'}}>🦷 Correção de técnicas em tempo real</div>
                       <div style={{marginBottom: '8px'}}>🦷 Ajuste de precificação quando necessário</div>
                       <div style={{marginBottom: '8px'}}>🦷 Melhoria da comunicação com pacientes</div>
-                      <div style={{marginBottom: '8px'}}>🦷 Otimização dos TPMC/PIC</div>
+                      <div style={{marginBottom: '8px'}}>🦷 Otimização dos TPNC/PIC</div>
                       <div style={{marginBottom: '8px'}}>🦷 Evolução constante dos resultados</div>
                     </div>
                   </div>
@@ -505,7 +505,7 @@ const DiagnosticoCX = () => {
                       <div style={{marginBottom: '8px'}}>🦷 Troca de experiências entre profissionais</div>
                       <div style={{marginBottom: '8px'}}>🦷 Networking qualificado e parcerias</div>
                       <div style={{marginBottom: '8px'}}>🦷 Motivação através de casos de sucesso</div>
-                      <div style={{marginBottom: '8px'}}>🦷 Suporte para implementação de TPMC/PIC</div>
+                      <div style={{marginBottom: '8px'}}>🦷 Suporte para implementação de TPNC/PIC</div>
                       <div style={{marginBottom: '8px'}}>🦷 Ambiente de crescimento profissional</div>
                     </div>
                   </div>
