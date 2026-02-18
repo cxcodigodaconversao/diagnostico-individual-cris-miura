@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import DiagnosticoCX from './DiagnosticoCX.jsx'
+import DiagnosticoCX from './diagnosticoCX.jsx'
 import './styles.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
