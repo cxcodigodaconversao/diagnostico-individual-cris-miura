@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Diagnóstico Individual de Valorização Profissional - Método Dentista que Salva Dentes">
+    <title>Diagnóstico Individual | Valorização Profissional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Readex+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary:   #082033;
+            --bg-card:      rgba(255,255,255,0.05);
+            --bg-card2:     rgba(255,255,255,0.08);
+            --gold:         #d2bc8f;
+            --gold2:        #c1a76f;
+            --gold-glow:    rgba(210,188,143,0.3);
+            --text:         #ffffff;
+            --text-sub:     rgba(255,255,255,0.85);
+            --text-muted:   rgba(255,255,255,0.45);
+            --border:       rgba(255,255,255,0.12);
+            --shadow:       0 0 50px rgba(210,188,143,0.07);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ─── HEADER ─── */
+        .header {
+            text-align: center;
+            padding: 40px 20px 45px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 3px;
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: var(--bg-primary);
+            padding: 14px 32px;
+            border-radius: 14px;
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 35px rgba(255,255,255,0.15);
+            text-transform: uppercase;
+        }
+
+        .header h1 {
+            font-family: 'Readex Pro', sans-serif;
+            font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 span { color: var(--gold); }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: var(--text-sub);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* ─── PROGRESS ─── */
+        .progress-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px 26px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .progress-text strong { color: var(--gold); font-weight: 700; }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 3px;
+            transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+            width: 0%;
+            position: relative;
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 18px var(--gold);
+        }
+
+        /* ─── QUESTION CARD ─── */
+        .quiz-section { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gold);
+            box-shadow: 0 0 18px var(--gold-glow);
+        }
+
+        .question-card.fade-out { opacity: 0; transform: translateX(-30px); }
+        .question-card.fade-in  { opacity: 1; transform: translateX(0); }
+
+        /* ─── TOPIC INDICATOR ─── */
+        .topic-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(210,188,143,0.1);
+            border: 1px solid rgba(210,188,143,0.25);
+            color: var(--gold);
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 25px;
+        }
+
+        .topic-indicator::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.5; transform: scale(0.85); }
+        }
+
+        .question-number {
+            display: none;
+        }
+
+        .question-text {
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.55;
+            font-weight: 500;
+        }
+
+        .question-note {
+            font-size: 0.88rem;
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            padding: 10px 14px;
+            background: rgba(210,188,143,0.07);
+            border-radius: 8px;
+            border-left: 2px solid var(--gold);
+        }
+
+        /* ─── RATING SCALE (0-10 radio) ─── */
+        .rating-container { margin: 30px 0; }
+
+        .rating-scale {
+            display: grid;
+            grid-template-columns: repeat(11, 1fr);
+            gap: 8px;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+
+        .rating-scale input[type="radio"] { display: none; }
+
+        .rating-scale label {
+            aspect-ratio: 1;
+            min-height: 44px;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            font-family: 'Readex Pro', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-sub);
+        }
+
+        .rating-scale label:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(210,188,143,0.2);
+        }
+
+        .rating-scale input[type="radio"]:checked + label {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg-primary);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 28px rgba(210,188,143,0.35);
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+            padding: 0 5px;
+        }
+
+        .scale-labels span { max-width: 130px; text-align: center; }
+        .scale-labels span:first-child { text-align: left; }
+        .scale-labels span:last-child  { text-align: right; }
+
+        /* ─── BUTTONS ─── */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-sub);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            border-color: rgba(255,255,255,0.4);
+            color: var(--text);
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--bg-primary);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(255,255,255,0.2);
+        }
+
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+        /* ─── RESULTS ─── */
+        .results { display: none; }
+
+        .results-header { text-align: center; margin-bottom: 50px; }
+
+        .results-header h2 {
+            font-family: 'Readex Pro', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            color: var(--text);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .results-header h2 span { color: var(--gold); }
+
+        .score-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-summary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gold);
+            box-shadow: 0 0 22px var(--gold-glow);
+        }
+
+        .total-score {
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            color: white;
+            background: rgba(255,255,255,0.08);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 210px;
+            height: 210px;
+            border-radius: 12px;
+            border: 3px solid rgba(255,255,255,0.2);
+            margin-bottom: 28px;
+        }
+
+        .score-level {
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .benchmark-note {
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(210,188,143,0.1);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            border: 1px solid rgba(210,188,143,0.2);
+        }
+
+        .benchmark-note strong { color: var(--gold); }
+
+        /* ─── PROBLEM AREAS ─── */
+        .problem-areas {
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.25);
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin: 40px 0;
+        }
+
+        .problem-areas h4 {
+            color: #ef4444;
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .problem-areas p { color: var(--text-sub); font-size: 0.95rem; line-height: 1.7; }
+        .problem-areas strong { color: #ef4444; }
+
+        /* ─── CHART ─── */
+        .chart-container {
+            max-width: 750px;
+            margin: 50px auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .chart-title {
+            text-align: center;
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* ─── DETAILED RESULTS ─── */
+        .detailed-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .result-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .result-item:hover { transform: translateY(-5px); }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-family: 'Readex Pro', sans-serif;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 1rem;
+            max-width: 200px;
+            line-height: 1.3;
+        }
+
+        .result-score {
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .result-score small { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+
+        .result-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .result-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(0.4,0,0.2,1);
+            background: white;
+        }
+
+        .result-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .result-status.excellent { background: rgba(39,174,96,0.15);  color: #27ae60; }
+        .result-status.good      { background: rgba(210,188,143,0.15); color: #d2bc8f; }
+        .result-status.warning   { background: rgba(230,126,34,0.15);  color: #e67e22; }
+        .result-status.critical  { background: rgba(239,68,68,0.15);   color: #ef4444; }
+
+        .result-fill.excellent { background: #27ae60; }
+        .result-fill.good      { background: var(--gold); }
+        .result-fill.warning   { background: #e67e22; }
+        .result-fill.critical  { background: #ef4444; }
+
+        .result-feedback {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+            padding: 15px;
+            background: var(--bg-card2);
+            border-radius: 12px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .result-quote {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(210,188,143,0.2);
+        }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            margin-top: 50px;
+            text-align: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-section h3 {
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1.6rem;
+            color: var(--text);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .cta-section h3 span { color: var(--gold); }
+
+        .cta-section p {
+            color: var(--text-sub);
+            margin-bottom: 30px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: var(--bg-primary);
+            padding: 18px 40px;
+            border-radius: 14px;
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 28px rgba(255,255,255,0.12);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 38px rgba(255,255,255,0.2);
+        }
+
+        /* ─── RESTART ─── */
+        .restart-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--text-sub);
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-family: 'Readex Pro', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            border-color: rgba(255,255,255,0.4);
+            color: var(--text);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .header { padding: 30px 15px; }
+            .header h1 { font-size: 1.6rem; }
+            .logo-badge { font-size: 0.9rem; padding: 12px 22px; }
+            .progress-section { padding: 18px 20px; }
+            .question-card { padding: 28px 18px; }
+            .question-text { font-size: 1.05rem; }
+            .rating-scale { grid-template-columns: repeat(6, 1fr); gap: 6px; }
+            .rating-scale label { min-height: 40px; font-size: 0.85rem; border-radius: 10px; }
+            .scale-labels { font-size: 0.75rem; }
+            .navigation-buttons { gap: 12px; }
+            .btn { padding: 12px 22px; font-size: 0.85rem; }
+            .total-score { font-size: 3.2rem; width: 170px; height: 170px; }
+            .score-level { font-size: 1.3rem; }
+            .chart-container { padding: 30px 15px; }
+            .detailed-results { grid-template-columns: 1fr; gap: 20px; }
+            .result-item { padding: 25px 18px; }
+            .cta-section { padding: 35px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .rating-scale { grid-template-columns: repeat(6, 1fr); gap: 4px; }
+            .rating-scale label { min-height: 36px; font-size: 0.8rem; border-radius: 8px; }
+            .question-text { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo-badge">🦷 Diagnóstico Individual</div>
+        <h1>Diagnóstico <span>Estratégico</span></h1>
+        <p class="subtitle">Método Dentista que Salva Dentes</p>
+        <p>Descubra seu nível de domínio nas 7 áreas essenciais da Valorização Profissional</p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-section">
+        <div class="progress-info">
+            <span class="progress-text"><strong id="progressPercent">3%</strong> concluído</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-section" id="quizSection">
+        <div class="question-card" id="questionCard">
+            <div class="topic-indicator" id="topicIndicator">🦷 Consulta Extraordinária</div>
+            <div class="question-number" id="questionNumber">Pergunta 1/34</div>
+            <div class="question-text" id="questionText"></div>
+            <div class="question-note" id="questionNote" style="display:none;"></div>
+
+            <div class="rating-container">
+                <div class="rating-scale">
+                    <input type="radio" name="currentAnswer" value="0"  id="answer0">  <label for="answer0">0</label>
+                    <input type="radio" name="currentAnswer" value="1"  id="answer1">  <label for="answer1">1</label>
+                    <input type="radio" name="currentAnswer" value="2"  id="answer2">  <label for="answer2">2</label>
+                    <input type="radio" name="currentAnswer" value="3"  id="answer3">  <label for="answer3">3</label>
+                    <input type="radio" name="currentAnswer" value="4"  id="answer4">  <label for="answer4">4</label>
+                    <input type="radio" name="currentAnswer" value="5"  id="answer5">  <label for="answer5">5</label>
+                    <input type="radio" name="currentAnswer" value="6"  id="answer6">  <label for="answer6">6</label>
+                    <input type="radio" name="currentAnswer" value="7"  id="answer7">  <label for="answer7">7</label>
+                    <input type="radio" name="currentAnswer" value="8"  id="answer8">  <label for="answer8">8</label>
+                    <input type="radio" name="currentAnswer" value="9"  id="answer9">  <label for="answer9">9</label>
+                    <input type="radio" name="currentAnswer" value="10" id="answer10"> <label for="answer10">10</label>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca consigo</span>
+                    <span>Sempre consigo</span>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" style="visibility:hidden;">← Anterior</button>
+                <button class="btn btn-primary"   id="nextBtn" onclick="nextQuestion()" disabled>Próxima →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results" class="results">
+        <div class="results-header">
+            <h2>Seu <span>Diagnóstico</span> Completo</h2>
+            <div class="score-summary">
+                <div class="total-score" id="totalScore">0%</div>
+                <div class="score-level"   id="scoreLevel">Calculando...</div>
+                <div class="score-message" id="scoreMessage"></div>
+                <div class="benchmark-note">
+                    <strong>Referência:</strong> Pontuações <strong>80-100%</strong> indicam excelência.
+                    Áreas abaixo de <strong>60%</strong> precisam de atenção prioritária.
+                </div>
+            </div>
+        </div>
+
+        <div class="problem-areas" id="problemAreas" style="display:none;">
+            <h4>⚠️ Atenção às Áreas Críticas</h4>
+            <p id="problemAreasText"></p>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="chart-title">Visão Geral das 7 Áreas</h3>
+            <canvas id="radarChart" width="400" height="400"></canvas>
+        </div>
+
+        <div class="detailed-results" id="detailedResults"></div>
+
+        <div class="cta-section">
+            <h3>Quer dominar a <span>Valorização Profissional</span>?</h3>
+            <p>Aprenda o método completo para diagnosticar, tratar e valorizar seu trabalho como Dentista que Salva Dentes.</p>
+            <a href="#" class="btn-cta">Quero me Valorizar →</a>
+            <br>
+            <button class="restart-btn" onclick="restartQuiz()">↺ Refazer Diagnóstico</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const topics = [
+    {
+        name: 'consulta',
+        label: 'Consulta Extraordinária',
+        shortLabel: 'Consulta',
+        icon: '🦷',
+        questions: [
+            { text: 'A cada 10 pacientes, em quantos deles você realiza a sondagem (PSR ou Periograma) dentro da alavanca da ação do paciente?' },
+            { text: 'A cada 10 pacientes, quantos TPNC/PIC consegue fechar?' },
+            { text: 'O quanto você utilizou a técnica da bola de cristal nos últimos 10 pacientes?' },
+            { text: 'A cada 10 pacientes com periodontite, quantos você encaminhou e quantos você tratou?' }
+        ]
+    },
+    {
+        name: 'instrumentacao',
+        label: 'Instrumentação',
+        shortLabel: 'Instrumentação',
+        icon: '⚙️',
+        questions: [
+            { text: 'O quanto a cureta deixou de ser o principal instrumento para sua instrumentação?' },
+            {
+                text: 'A cada 10 profilaxia/FMD (full mouth disinfection), quantos você utiliza o evidenciador de placa, como GPS do procedimento?',
+                note: 'Se você não usa o evidenciador, você vai ter que instrumentar a boca inteira, isso é mais doloroso e demorado.'
+            },
+            { text: 'O quanto é confortável a sua instrumentação para o paciente mesmo com hipersensibilidade?' },
+            { text: 'A cada 10 pacientes, quantos elogiam exageradamente o resultado da sua instrumentação?' },
+            { text: 'A cada 10 pacientes, quantos falam: nossa, nunca vi meus dentes tão brilhosos assim?' }
+        ]
+    },
+    {
+        name: 'periodontal',
+        label: 'Tratamento Periodontal Não Cirúrgico',
+        shortLabel: 'TPNC',
+        icon: '🔬',
+        questions: [
+            { text: 'O quanto você se sente segura para instrumentar bolsas profundas com ultrassom?' },
+            { text: 'O quanto você se sente segura para realizar TPNC de periodontite estágio 3 (severa) e 4 (avançada)?' },
+            { text: 'O quanto você se sente segura para realizar TPNC de mucosite peri-implantar?' },
+            { text: 'O quanto você se sente segura na prescrição de antibioticoterapia dentro do TPNC?' }
+        ]
+    },
+    {
+        name: 'sistemicos',
+        label: 'Problemas Sistêmicos',
+        shortLabel: 'Sistêmicos',
+        icon: '🩺',
+        questions: [
+            { text: 'A cada 10 pacientes sistêmicos, quantos deles você explica a relação da inflamação da boca com o resto do corpo aumentando o risco de hipertensão, AVC, infarto, endocardite, Alzheimer, demência, câncer, diabetes, artrite reumatoide? (história do incêndio)' },
+            { text: 'O quanto consegue ter sucesso no tratamento da periodontite em pacientes diabéticos descompensados?' },
+            { text: 'O quanto consegue tratar Periodontite impedindo o progresso da perda óssea em pacientes tabagistas com segurança?' },
+            { text: 'O quanto você se sente seguro para tratar Periodontite em pacientes com depressão e/ou ansiedade?' },
+            { text: 'A cada 10 pacientes sistêmicos, quantos deles você prescreve suplementação (vit D, C, B12, Omega3) para melhorar o resultado do TPNC?' }
+        ]
+    },
+    {
+        name: 'precificacao',
+        label: 'Precificação',
+        shortLabel: 'Precificação',
+        icon: '💰',
+        questions: [
+            { text: 'O quanto o seu tratamento para Periodontite estágio I (Inicial) se aproxima de R$ 5.000?' },
+            { text: 'O quanto o seu tratamento para Periodontite estágio II (Moderada) se aproxima de R$ 10.000?' },
+            { text: 'O quanto o seu tratamento para Periodontite estágio III (Severa) se aproxima de R$ 15.000?' },
+            { text: 'O quanto o seu tratamento para Periodontite estágio IV (Avançada) se aproxima de R$ 20.000?' },
+            { text: 'O quanto o seu tratamento para Gengivite se aproxima de R$ 4.000?' },
+            { text: 'O quanto a sua profilaxia de uma hora se aproxima de R$ 500?' }
+        ]
+    },
+    {
+        name: 'captacao',
+        label: 'Captação',
+        shortLabel: 'Captação',
+        icon: '📢',
+        questions: [
+            { text: "A cada 10 pacientes, quantos deles te conheceram através da sua reputação de 'salvar dentes'?" },
+            { text: 'O quanto as suas ações para reativar pacientes antigos se aproxima de 12, considerando o período de 1 ano?' },
+            { text: 'O quanto suas parcerias com colegas para encaminhamentos se aproxima de 5 profissionais ativos?' },
+            { text: 'Você tem 10 novos pacientes chegando através de indicações de pacientes satisfeitos por mês?' },
+            { text: 'A cada 10 pacientes, quantos deles te reconhecem como um dentista que salva dentes?' }
+        ]
+    },
+    {
+        name: 'recorrencia',
+        label: 'Recorrência',
+        shortLabel: 'Recorrência',
+        icon: '🔄',
+        questions: [
+            { text: 'A cada 10 pacientes, quantos deles estão em um PIC (Programa de prevenção)?' },
+            { text: 'A cada 10 pacientes com implantes ou protocolo, quantos deles estão em um PIC (Programa de prevenção)?' },
+            { text: 'A cada 10 pacientes com doenças cardiovasculares (hipertensão, stent, infarto, AVC, dislipidemia), quantos deles estão em um PIC (Programa de prevenção)?' },
+            { text: 'Nos 10 últimos atendimentos, quantos deles você apresentou novidades (produtos odontológicos ou orientações de estilo de vida) para os pacientes?' }
+        ]
+    }
+];
+
+// Flatten all questions
+const allQuestions = [];
+topics.forEach(topic => {
+    topic.questions.forEach((question, index) => {
+        allQuestions.push({
+            topicName:  topic.name,
+            topicLabel: topic.label,
+            topicIcon:  topic.icon,
+            questionIndex: index,
+            text: question.text,
+            note: question.note || null,
+            id: `${topic.name}_${index}`
+        });
+    });
+});
+
+const totalQuestions = allQuestions.length;
+document.getElementById('totalQuestionsDisplay').textContent = totalQuestions;
+
+let currentQuestionIndex = 0;
+let answers = {};
+let radarChart;
+
+// ─── FEEDBACK ───
+function getTopicFeedback(topicName, pct) {
+    const fb = {
+        consulta: {
+            excellent: "Você domina a consulta extraordinária! A sondagem é realizada com consistência, o fechamento de TPNC/PIC é uma realidade e suas técnicas de comunicação geram reconhecimento e resultados eficazes. Você está no topo da diferenciação profissional.",
+            good: "Boa base de consulta, mas há espaço para crescer. Com maior consistência na sondagem e nas técnicas de fechamento, você eleva seu reconhecimento e a eficácia dos seus resultados. Pequenos ajustes fazem toda a diferença.",
+            warning: "Sua consulta ainda não é extraordinária. A sondagem é subutilizada, o fechamento de TPNC/PIC é inconsistente e o reconhecimento ainda não chegou no nível que você merece. É hora de estruturar seu roteiro de consulta para gerar resultados eficazes.",
+            critical: "Sua consulta está longe do potencial. Sem sondagem sistemática e sem fechamentos consistentes, você está perdendo a oportunidade de ser reconhecida como uma dentista de resultado. Cada paciente que sai sem diagnóstico preciso é uma oportunidade perdida."
+        },
+        instrumentacao: {
+            excellent: "Você domina a instrumentação! O evidenciador guia seu trabalho, os pacientes se sentem confortáveis mesmo com hipersensibilidade e os elogios chegam espontâneos: 'nunca vi meus dentes tão brilhosos assim!' Você é referência em instrumentação de alto padrão.",
+            good: "Boa evolução na instrumentação, mas ainda há inconsistências. Com mais constância no uso do evidenciador e no refinamento do conforto do paciente, seus resultados vão impressionar ainda mais — e os elogios vão aumentar.",
+            warning: "Sua instrumentação ainda não alcança o nível WOW. O evidenciador é subutilizado, o conforto do paciente é inconsistente e os elogios espontâneos são raros. Dominar o FMD completo transforma a percepção do seu trabalho.",
+            critical: "Sua instrumentação precisa de atualização urgente. Sem o evidenciador como GPS e sem o protocolo correto, seus resultados são medianos. O paciente que não fala 'nunca vi meus dentes assim' ainda não percebeu o diferencial do seu trabalho."
+        },
+        periodontal: {
+            excellent: "Sua segurança clínica é excepcional! Você trata bolsas profundas, maneja casos complexos e conduz TPNC de periodontite estágio 3 e 4 com domínio total. Salvar dentes que colegas condenaram é o maior acelerador do seu reconhecimento — e você já faz isso. Você é referência.",
+            good: "Boa segurança nos procedimentos básicos, mas casos severos ainda geram insegurança. O caso complexo é um acelerador de reconhecimento — quanto mais você dominar os estágios 3 e 4, mais rápido você se tornará referência na sua região.",
+            warning: "Você tem segurança limitada em casos periodontais complexos. Lembre-se: nada te transforma em referência tão rápido quanto salvar dentes condenados evitando cirurgia e fazendo o paciente economizar. Esse domínio ainda está por desenvolver.",
+            critical: "Sua segurança clínica no tratamento periodontal precisa de desenvolvimento urgente. Sem domínio nos estágios 3 e 4, você está limitada a casos simples — e perdendo a oportunidade de ser a dentista que salva dentes que outros condenaram."
+        },
+        sistemicos: {
+            excellent: "Você é especialista no manejo de pacientes sistêmicos! Lembre-se: você não escolhe o paciente que senta na sua cadeira — e você está preparada para tudo. Explica a conexão boca-corpo, trata com segurança e prescreve suplementação. Salvar dentes condenados em pacientes complexos é o maior acelerador do seu reconhecimento.",
+            good: "Boa capacidade de manejo sistêmico, mas ainda há lacunas. Você não escolhe o paciente que senta na sua cadeira — você precisa estar preparada para tudo. O caso complexo sistêmico é um acelerador de reconhecimento quando conduzido com excelência.",
+            warning: "Pacientes sistêmicos ainda geram insegurança. Mas atenção: você não escolhe quem senta na sua cadeira. Diabéticos, tabagistas, pacientes com depressão — todos chegam. Preparar-se para tratá-los com segurança é o que separa uma dentista comum de uma referência.",
+            critical: "O manejo de pacientes sistêmicos é uma lacuna crítica. Você não escolhe o paciente que senta na sua cadeira — você precisa estar preparada para tudo. Sem esse domínio, você está exposta a riscos clínicos e perdendo os casos que mais geram reconhecimento profissional."
+        },
+        precificacao: {
+            excellent: "Você precifica pelo valor que entrega! Sua tabela está alinhada com os valores de referência do método — de R$ 5.000 no estágio I a R$ 20.000 no estágio IV. A segurança clínica é a mãe da valorização profissional, e você prova isso a cada tratamento.",
+            good: "Você está no caminho da precificação por valor, mas ainda abaixo do potencial. Lembre-se: a insegurança no prognóstico derruba o valor do procedimento. Quanto mais segura clinicamente, mais confiança você tem para cobrar o que seu trabalho vale.",
+            warning: "Sua precificação está significativamente abaixo do potencial. A insegurança é a principal causa da desvalorização profissional. Quando você não acredita plenamente no seu diagnóstico, você cobra menos — e o paciente percebe. É hora de mudar isso.",
+            critical: "Sua precificação está muito distante do que o método permite cobrar. A insegurança clínica é a principal causa da desvalorização profissional. Cobrar barato não atrai mais pacientes — apenas confirma a falta de confiança no próprio trabalho. A segurança clínica é a mãe da valorização: desenvolva uma, e a outra vem junto."
+        },
+        captacao: {
+            excellent: "Você tem uma máquina de captação funcionando! Sua reputação de 'dentista que salva dentes' atrai pacientes, as indicações fluem, as parcerias estão ativas e sua estabilidade financeira é uma realidade. Você está construindo independência financeira de verdade.",
+            good: "Boa base de captação, mas ainda há oportunidades não aproveitadas. Ampliar parcerias e sistematizar indicações pode acelerar seu crescimento rumo à estabilidade e independência financeira que você busca.",
+            warning: "Sua captação é irregular e não sistematizada. Sem reconhecimento como referência em salvar dentes, a estabilidade financeira fica comprometida e a independência financeira parece distante. É hora de construir uma estratégia consistente.",
+            critical: "Você não tem um sistema de captação funcionando. Sem reputação, sem indicações e sem parcerias, não há estabilidade financeira — e a independência financeira fica cada vez mais distante. Isso precisa mudar urgentemente."
+        },
+        recorrencia: {
+            excellent: "Você tem um sistema de recorrência sólido! O PIC (Programa de Prevenção) é oferecido para todos os perfis de pacientes e representa receita previsível. Essa é a base da sua estabilidade financeira e o caminho mais direto para a independência financeira.",
+            good: "Você oferece o PIC, mas a adesão ainda pode crescer. Com comunicação mais clara do valor da prevenção, você aumenta sua receita recorrente e constrói a estabilidade financeira que gera independência financeira real.",
+            warning: "Seu sistema de recorrência é fraco. Poucos pacientes estão no PIC e a receita previsível é baixa. Sem recorrência, não há estabilidade financeira — e sem estabilidade, a independência financeira não chega. Há muito potencial sendo desperdiçado aqui.",
+            critical: "Você não tem recorrência estruturada. Trata e perde o paciente. Sem o PIC como rotina, você recomeça do zero todo mês — o oposto da estabilidade financeira e da independência financeira. Implementar um programa de manutenção é essencial para mudar isso."
+        }
+    };
+    const t = fb[topicName];
+    if (!t) return "Continue desenvolvendo esta área!";
+    if (pct >= 80) return t.excellent;
+    if (pct >= 60) return t.good;
+    if (pct >= 40) return t.warning;
+    return t.critical;
+}
+
+function getScoreLevel(pct) {
+    if (pct >= 80) return {
+        level: 'Excelência em Valorização',
+        message: 'Parabéns! Você demonstra domínio excepcional nas 7 áreas do Método Dentista que Salva Dentes. Suas habilidades clínicas, estratégia comercial e reconhecimento profissional estão em patamar de excelência. Você está pronta para escalar e ser referência na sua região.'
+    };
+    if (pct >= 60) return {
+        level: 'Profissional Estruturada',
+        message: 'Você possui uma base sólida no método, mas ainda há gaps que limitam sua valorização e reconhecimento. Com refinamentos estratégicos nas áreas identificadas, você alcança a excelência e o nível de faturamento que seu trabalho merece.'
+    };
+    if (pct >= 40) return {
+        level: 'Em Desenvolvimento',
+        message: 'Você tem conhecimento, mas falta consistência em múltiplas áreas. As inconsistências estão limitando sua capacidade de salvar dentes, seu reconhecimento profissional e sua valorização no mercado. Há muito potencial esperando para ser desbloqueado.'
+    };
+    if (pct >= 20) return {
+        level: 'Atenção Necessária',
+        message: 'Sua prática apresenta lacunas significativas em áreas fundamentais do método. Uma revisão completa da sua estratégia profissional é necessária para destravar seu potencial de valorização e conquistar a estabilidade financeira que você busca.'
+    };
+    return {
+        level: 'Ponto de Partida',
+        message: 'Identificar esses gaps é o primeiro passo para uma transformação completa. Você está no início da jornada de valorização profissional — e a boa notícia é que, a partir daqui, cada passo gera resultado.'
+    };
+}
+
+function getStatusClass(pct) {
+    if (pct >= 80) return 'excellent';
+    if (pct >= 60) return 'good';
+    if (pct >= 40) return 'warning';
+    return 'critical';
+}
+
+function getStatusText(pct) {
+    if (pct >= 80) return '✓ Excelente';
+    if (pct >= 60) return '◐ Bom';
+    if (pct >= 40) return '⚠ Atenção';
+    return '✗ Crítico';
+}
+
+function getTopicQuote(topicName, pct) {
+    const quotes = {
+        consulta: {
+            excellent: '"Ser melhor gera reconhecimento — e reconhecimento gera resultado eficaz."',
+            good: '"Ser melhor gera reconhecimento — e reconhecimento gera resultado eficaz."',
+            warning: '"Ser melhor gera reconhecimento — e reconhecimento gera resultado eficaz."',
+            critical: '"Ser melhor gera reconhecimento — e reconhecimento gera resultado eficaz."'
+        },
+        instrumentacao: null,
+        periodontal: {
+            excellent: '"Salvar dentes que colegas condenaram é o maior acelerador do seu reconhecimento profissional."',
+            good: '"O caso complexo é um acelerador de reconhecimento."',
+            warning: '"Nada te transforma em referência tão rápido quanto salvar dentes condenados evitando cirurgia e fazendo o paciente economizar."',
+            critical: '"Nada te transforma em referência tão rápido quanto salvar dentes condenados evitando cirurgia e fazendo o paciente economizar."'
+        },
+        sistemicos: {
+            excellent: '"Salvar dentes que colegas condenaram é o maior acelerador do seu reconhecimento profissional."',
+            good: '"O caso complexo é um acelerador de reconhecimento."',
+            warning: '"Você não escolhe o paciente que senta na sua cadeira — você precisa estar preparada para tudo."',
+            critical: '"Você não escolhe o paciente que senta na sua cadeira — você precisa estar preparada para tudo."'
+        },
+        precificacao: {
+            excellent: '"A segurança clínica é a mãe da valorização profissional."',
+            good: '"A insegurança no prognóstico derruba o valor do procedimento."',
+            warning: '"A insegurança é a principal causa da desvalorização profissional."',
+            critical: '"A insegurança é a principal causa da desvalorização profissional."'
+        },
+        captacao: {
+            excellent: '"Estabilidade financeira e independência financeira: esse é o destino de quem tem captação sólida."',
+            good: '"Estabilidade financeira e independência financeira começam com um sistema de captação consistente."',
+            warning: '"Sem captação sistematizada, não há estabilidade financeira — e a independência financeira fica distante."',
+            critical: '"Estabilidade financeira e independência financeira dependem de um sistema de captação funcionando."'
+        },
+        recorrencia: {
+            excellent: '"Estabilidade financeira e independência financeira: a recorrência é o caminho mais seguro para chegar lá."',
+            good: '"Estabilidade financeira e independência financeira se constroem com receita previsível todo mês."',
+            warning: '"Sem recorrência, não há estabilidade financeira. Sem estabilidade, não há independência financeira."',
+            critical: '"Estabilidade financeira e independência financeira começam com o PIC. Sem ele, você recomeça do zero todo mês."'
+        }
+    };
+    const q = quotes[topicName];
+    if (!q) return null;
+    if (pct >= 80) return q.excellent;
+    if (pct >= 60) return q.good;
+    if (pct >= 40) return q.warning;
+    return q.critical;
+}
+
+// ─── QUIZ LOGIC ───
+function updateProgress() {
+    const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+    document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+    document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+}
+
+function displayQuestion() {
+    const q = allQuestions[currentQuestionIndex];
+    document.getElementById('topicIndicator').innerHTML = `${q.topicIcon} ${q.topicLabel}`;
+    document.getElementById('questionNumber').textContent = `Pergunta ${currentQuestionIndex + 1}/${totalQuestions}`;
+    document.getElementById('questionText').textContent = q.text;
+
+    const noteEl = document.getElementById('questionNote');
+    if (q.note) {
+        noteEl.textContent = q.note;
+        noteEl.style.display = 'block';
+    } else {
+        noteEl.style.display = 'none';
+    }
+
+    document.querySelectorAll('input[name="currentAnswer"]').forEach(r => r.checked = false);
+    if (answers[q.id] !== undefined) {
+        document.getElementById(`answer${answers[q.id]}`).checked = true;
+    }
+
+    updateNavigationButtons();
+    updateProgress();
+}
+
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    prevBtn.style.visibility = currentQuestionIndex === 0 ? 'hidden' : 'visible';
+    const sel = document.querySelector('input[name="currentAnswer"]:checked');
+    nextBtn.disabled = !sel;
+    nextBtn.textContent = currentQuestionIndex === totalQuestions - 1 ? 'Ver Resultado →' : 'Próxima →';
+}
+
+function saveCurrentAnswer() {
+    const sel = document.querySelector('input[name="currentAnswer"]:checked');
+    if (sel) answers[allQuestions[currentQuestionIndex].id] = parseInt(sel.value);
+}
+
+function nextQuestion() {
+    saveCurrentAnswer();
+    if (currentQuestionIndex < totalQuestions - 1) {
+        currentQuestionIndex++;
+        animateTransition();
+    } else {
+        showResults();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+        saveCurrentAnswer();
+        currentQuestionIndex--;
+        animateTransition();
+    }
+}
+
+function animateTransition() {
+    const card = document.getElementById('questionCard');
+    card.classList.add('fade-out');
+    setTimeout(() => {
+        displayQuestion();
+        card.classList.remove('fade-out');
+        card.classList.add('fade-in');
+        setTimeout(() => card.classList.remove('fade-in'), 400);
+    }, 300);
+}
+
+// ─── RESULTS ───
+function calculateResults() {
+    const topicResults = {};
+    let totalScore = 0, totalAnswered = 0;
+
+    topics.forEach(topic => {
+        let score = 0, answered = 0;
+        topic.questions.forEach((_, i) => {
+            const v = answers[`${topic.name}_${i}`];
+            if (v !== undefined) { score += v; answered++; }
+        });
+        const maxPossible = answered * 10;
+        const pct = maxPossible > 0 ? (score / maxPossible) * 100 : 0;
+        topicResults[topic.name] = {
+            score, average: answered > 0 ? score / answered : 0,
+            percentage: pct, label: topic.label,
+            shortLabel: topic.shortLabel, icon: topic.icon
+        };
+        totalScore += score; totalAnswered += answered;
+    });
+
+    const overallMax = totalAnswered * 10;
+    return {
+        individual: topicResults,
+        total: totalScore,
+        percentage: overallMax > 0 ? (totalScore / overallMax) * 100 : 0
+    };
+}
+
+function createRadarChart(results) {
+    const ctx = document.getElementById('radarChart').getContext('2d');
+    if (radarChart) radarChart.destroy();
+
+    const labels     = topics.map(t => t.shortLabel);
+    const dataPoints = topics.map(t => results.individual[t.name].average);
+    const isMobile   = window.innerWidth <= 768;
+
+    radarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels,
+            datasets: [
+                {
+                    label: 'Seu Resultado',
+                    data: dataPoints,
+                    borderColor: '#d2bc8f',
+                    backgroundColor: 'rgba(210,188,143,0.18)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#d2bc8f',
+                    pointBorderColor: '#082033',
+                    pointBorderWidth: 2,
+                    pointRadius: 7
+                },
+                {
+                    label: 'Referência Bom (8)',
+                    data: new Array(topics.length).fill(8),
+                    borderColor: 'rgba(255,255,255,0.3)',
+                    backgroundColor: 'rgba(255,255,255,0.03)',
+                    borderWidth: 2,
+                    borderDash: [5,5],
+                    pointBackgroundColor: 'rgba(255,255,255,0.3)',
+                    pointBorderColor: '#082033',
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: 'rgba(255,255,255,0.65)',
+                        font: { size: isMobile ? 10 : 12, family: 'Montserrat', weight: '500' },
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 10,
+                    ticks: {
+                        stepSize: 2,
+                        color: 'rgba(255,255,255,0.25)',
+                        backdropColor: 'transparent',
+                        font: { size: 10 }
+                    },
+                    grid:       { color: 'rgba(255,255,255,0.1)' },
+                    angleLines: { color: 'rgba(255,255,255,0.1)' },
+                    pointLabels: {
+                        color: '#ffffff',
+                        font: { size: isMobile ? 10 : 12, family: 'Montserrat', weight: '600' },
+                        padding: 18
+                    }
+                }
+            }
+        }
+    });
+}
+
+function displayDetailedResults(results) {
+    const container = document.getElementById('detailedResults');
+    container.innerHTML = '';
+
+    // Problem areas banner
+    const criticals = topics
+        .filter(t => results.individual[t.name].percentage < 60)
+        .sort((a,b) => results.individual[a.name].percentage - results.individual[b.name].percentage);
+
+    if (criticals.length > 0) {
+        const names = criticals.map(t =>
+            `<strong>${t.icon} ${t.label}</strong> (${results.individual[t.name].percentage.toFixed(0)}%)`
+        ).join(', ');
+        document.getElementById('problemAreasText').innerHTML =
+            `As áreas ${names} estão abaixo da média e precisam de atenção prioritária. Resolver esses gaps vai destravar sua valorização profissional.`;
+        document.getElementById('problemAreas').style.display = 'block';
+    }
+
+    // Sort worst → best
+    const sorted = [...topics].sort((a,b) =>
+        results.individual[a.name].percentage - results.individual[b.name].percentage
+    );
+
+    sorted.forEach(topic => {
+        const r  = results.individual[topic.name];
+        const sc = getStatusClass(r.percentage);
+        const st = getStatusText(r.percentage);
+        const fb = getTopicFeedback(topic.name, r.percentage);
+        const qt = getTopicQuote(topic.name, r.percentage);
+
+        const quoteHTML = qt ? `<div class="result-quote">${qt}</div>` : '';
+
+        const el = document.createElement('div');
+        el.className = 'result-item';
+        el.innerHTML = `
+            <div class="result-header">
+                <div class="result-title">${topic.icon} ${topic.label}</div>
+                <div class="result-score">${r.average.toFixed(1)} <small>/ 10</small></div>
+            </div>
+            <div class="result-bar">
+                <div class="result-fill ${sc}" style="width:0%;"></div>
+            </div>
+            <div class="result-status ${sc}">${st} (${r.percentage.toFixed(0)}%)</div>
+            <div class="result-feedback">${fb}${quoteHTML}</div>
+        `;
+        container.appendChild(el);
+        setTimeout(() => el.querySelector('.result-fill').style.width = `${r.percentage}%`, 100);
+    });
+}
+
+function showResults() {
+    const results   = calculateResults();
+    const scoreInfo = getScoreLevel(results.percentage);
+
+    document.getElementById('totalScore').textContent  = `${results.percentage.toFixed(0)}%`;
+    document.getElementById('scoreLevel').textContent  = scoreInfo.level;
+    document.getElementById('scoreMessage').textContent = scoreInfo.message;
+
+    createRadarChart(results);
+    displayDetailedResults(results);
+
+    document.getElementById('quizSection').style.display     = 'none';
+    document.querySelector('.progress-section').style.display = 'none';
+    document.getElementById('results').style.display         = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restartQuiz() {
+    currentQuestionIndex = 0;
+    answers = {};
+    document.getElementById('results').style.display          = 'none';
+    document.getElementById('quizSection').style.display      = '';
+    document.querySelector('.progress-section').style.display = '';
+    document.getElementById('problemAreas').style.display     = 'none';
+    displayQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Event listeners
+document.addEventListener('change', e => {
+    if (e.target.name === 'currentAnswer') updateNavigationButtons();
+});
+
+document.addEventListener('keydown', e => {
+    if (document.getElementById('results').style.display === 'block') return;
+    if (e.key >= '0' && e.key <= '9') {
+        document.getElementById(`answer${e.key}`).checked = true;
+        updateNavigationButtons();
+    } else if (e.key === 'Enter' && !document.getElementById('nextBtn').disabled) {
+        nextQuestion();
+    } else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) {
+        nextQuestion();
+    } else if (e.key === 'ArrowLeft' && currentQuestionIndex > 0) {
+        previousQuestion();
+    }
+});
+
+// Init
+displayQuestion();
+</script>
+</body>
+</html>
